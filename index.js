@@ -11,6 +11,17 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'vistas'));
 
+app.get('/productos-test', async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM productos");
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.send("Error productos");
+  }
+});
+
+
 const rutas = require('./routes/userRoutes');
 app.use('/', rutas);
 
