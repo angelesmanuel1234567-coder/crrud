@@ -5,10 +5,7 @@ exports.vista = async (req, res) => {
     try {
         const productos = await Producto.getAll();
 
-        res.render('productos', { 
-            productos,
-            editar: null
-        });
+        res.json(productos);
 
     } catch (error) {
         console.error("ERROR EN VISTA:", error);
