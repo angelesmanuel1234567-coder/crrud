@@ -12,8 +12,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'vistas'));
 
 // rutas
-const rutas = require('./routes/userRoutes');
-app.use('/', rutas);
+app.get('/', (req, res) => {
+    res.send("Servidor funcionando 🚀");
+});
 
 // redirección
 app.get('/', (req, res) => {
