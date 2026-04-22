@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Productos</title>
+
+    <style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #38bdf8;
+        font-size: 30px;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        background: #1e293b;
+        padding: 20px;
+        max-width: 650px;
+        margin: auto;
+        border-radius: 12px;
+        display: flex;
+        gap: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        border: 1px solid #334155;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #0f172a;
+        color: #e2e8f0;
+        flex: 1;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 8px #38bdf8;
+    }
+
+    button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        background: #38bdf8;
+        color: #0f172a;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #0ea5e9;
+        transform: scale(1.05);
+    }
+
+    table {
+        width: 100%;
+        margin-top: 25px;
+        background: #1e293b;
+        border-collapse: collapse;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    th {
+        background: #0f172a;
+        color: #38bdf8;
+        padding: 12px;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #334155;
+        color: #e2e8f0;
+    }
+
+    tr:hover {
+        background: #0f172a;
+        transition: 0.2s;
+    }
+
+    a {
+        padding: 6px 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 12px;
+        margin: 0 2px;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .edit {
+        background: #facc15;
+        color: #0f172a;
+    }
+
+    .edit:hover {
+        background: #eab308;
+    }
+
+    .delete {
+        background: #ef4444;
+        color: white;
+    }
+
+    .delete:hover {
+        background: #dc2626;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>📦 Productos</h1>
+
+<!-- FORM CREAR / EDITAR -->
+<form action="<%= editar ? '/productos/edit/' + editar.id_producto : '/productos' %>" method="POST">
+
+    <input name="descripcion" placeholder="Descripción"
+        value="<%= editar ? editar.descripcion : '' %>" required>
+
+    <input name="precio" placeholder="Precio"
+        value="<%= editar ? editar.precio : '' %>" required>
+
+    <input name="stock" placeholder="Stock"
+        value="<%= editar ? editar.stock : '' %>" required>
+
+    <button>
+        <%= editar ? 'Actualizar' : 'Guardar' %>
+    </button>
+
+</form>
+
+<!-- TABLA -->
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+    </tr>
+
+    <% productos.forEach(p => { %>
+        <tr>
+            <td><%= p.id_producto %></td>
+            <td><%= p.descripcion %></td>
+            <td><%= p.precio %></td>
+            <td><%= p.stock %></td>
+            <td>
+                <a class="edit" href="/productos/edit/<%= p.id_producto %>">Editar</a>
+                <a class="delete" href="/productos/delete/<%= p.id_producto %>">Eliminar</a>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+</body>
+</html>
