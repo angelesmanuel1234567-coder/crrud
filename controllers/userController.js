@@ -5,17 +5,13 @@ exports.vista = async (req, res) => {
     try {
         const productos = await Producto.getAll();
 
-      res.render('productos', { 
-    productos,
-    editar: null
-});
+        res.send("FUNCIONA BACKEND");
 
     } catch (error) {
         console.error("ERROR EN VISTA:", error);
         res.status(500).send("Error al cargar productos");
     }
 };
-
 // crear
 exports.guardar = async (req, res) => {
     try {
