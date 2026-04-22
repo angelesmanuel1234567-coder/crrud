@@ -14,11 +14,15 @@ app.set('views', path.join(__dirname, 'vistas'));
 // rutas
 const rutas = require('./routes/userRoutes');
 app.use('/', rutas);
-    
+
+// redirección
 app.get('/', (req, res) => {
     res.redirect('/productos');
 });
 
-app.listen(3000, () => {
-    console.log('Servidor http://localhost:3000');
+// ✔ PUERTO CORRECTO PARA RENDER
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
 });
